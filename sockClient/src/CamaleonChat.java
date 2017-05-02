@@ -106,7 +106,7 @@ public class CamaleonChat extends javax.swing.JFrame {
         cliente.setMensaje(jTextArea1.getText());
         System.out.println("Mensaje enviado: " + cliente.getMensaje());
         cliente.enviarMensaje();
-        cliente.mostrarMensaje();
+        //cliente.mostrarMensaje();
     }//GEN-LAST:event_Boton1ActionPerformed
 
   

@@ -39,7 +39,7 @@ public class SockClient {
         this.principal = new Thread(() -> {
             try {
                 host = new Socket("127.0.0.1",7010);
-            }catch(IOException ex){
+            } catch(IOException ex){
                 System.out.println("Error en hilo principal" + ex.getMessage());
             }
         });
@@ -74,10 +74,24 @@ public class SockClient {
 
                 // esperamos una resopuesta por parte del servidor
                 datosEntrada.read(buffer);
-                System.out.println("El servidor nos contesta: " + new String(buffer));
-                // terminamos el procesamiento del socket
-
-                CamaleonChat.jTextArea1.setText("");
+                
+                //mostrarMensaje(new String(buffer));
+                
+                //El string respuesta del servidor
+                String respuestaServidor =  new String(buffer);
+                String mensajeCliente; 
+                
+                System.out.println("El servidor nos contesta: " + respuestaServidor);
+                if (!respuestaServidor.isEmpty()) {
+                    System.out.println("if");
+                    mensajeCliente = "Cliente: " + mensaje + " ✓ \n"; 
+                } else {
+                    System.out.println("else");
+                    mensajeCliente = "Cliente:✓ " + mensaje;
+                } 
+                System.out.println("Mensaje cliente: " + mensajeCliente);
+                CamaleonChat.jTextArea2.append(mensajeCliente);
+                CamaleonChat.jTextArea1.setText(null);
 
             } else {
                 System.out.println(host);
@@ -94,14 +108,15 @@ public class SockClient {
         }
     }
 
-    public void mostrarMensaje() {
+    public void mostrarMensaje(String mensaje) {
         Thread hiloLeer;
         hiloLeer = new Thread(() -> {
             try {
                 lector = new BufferedReader(new InputStreamReader(host.getInputStream()));
                 while (true) {
                     String msgRecibido = lector.readLine();
-                    CamaleonChat.jTextArea2.append("Cliente#d%:" + msgRecibido);
+                    System.out.println("El servidor nos contesta: " + mensaje);
+                    CamaleonChat.jTextArea2.append("Cliente#d%:" + mensaje);
                     CamaleonChat.jTextArea2.append("Cliente#d%:" + datosSalida);
                 }
             } catch (IOException ex) {
