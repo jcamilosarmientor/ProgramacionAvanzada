@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author samuelfelipe
+ * @author Juan Camilo Sarmiento Reyes
+ * @author Samuel Holguin
+ * @version 0.1
  */
 public class CamaleonChat extends javax.swing.JFrame {
 
@@ -45,6 +41,7 @@ public class CamaleonChat extends javax.swing.JFrame {
 
         jScrollPane2.setBackground(new java.awt.Color(102, 255, 255));
 
+        jTextArea2.setEditable(false);
         jTextArea2.setBackground(new java.awt.Color(153, 255, 255));
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -102,11 +99,13 @@ public class CamaleonChat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton1ActionPerformed
-        
-        cliente.setMensaje(jTextArea1.getText());
-        System.out.println("Mensaje enviado: " + cliente.getMensaje());
-        cliente.enviarMensaje();
-        //cliente.mostrarMensaje();
+
+        cliente.setMensajeCliente(jTextArea1.getText());
+        Thread principal = new Thread(() -> {
+            cliente.mostrarMensaje();
+            cliente.enviarMensaje();
+        });
+        principal.start();
     }//GEN-LAST:event_Boton1ActionPerformed
 
   

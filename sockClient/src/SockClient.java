@@ -1,42 +1,45 @@
+
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Calendar;
 
+/**
+ *
+ * @author Juan Camilo Sarmiento Reyes
+ * @author Samuel Holguin
+ * @version 0.1
+ */
 public class SockClient {
 
     private int puerto;     //puerto del servidor
     private String hostIP;  //host del servidor
-    private String mensaje; //mensaje enviado desde el cliente
-    private String miIp;    //ip del cliente
+    private String mensajeCliente; //mensaje enviado desde el cliente
+
+    private ArrayList<Mensaje> conversacion;
+    private Mensaje mensaje;
 
     private Socket host;    //socket del servidor
-   
-    private DataInputStream datosEntrada;   //tuberia para datos de entrada (desde el servidor)
-    private DataOutputStream datosSalida;   //tuberia para datos de salida (desde el cliente)
 
-    private BufferedReader lector = null;   //buffered para leer mensajes (aun no definitivo)
-
-    private byte buffer[]; // Un area de memoria que se utiliza para guardar los datos que leemos del cliente
+    private BufferedReader lector;
+    private PrintWriter escritor;
 
     public SockClient() {
         try {
             puerto = 7010;
             hostIP = "localhost";
-            miIp = InetAddress.getLocalHost().getHostAddress();
-            buffer = new byte[512];
+            conversacion = new ArrayList<>();
 
             System.out.println("Iniciando el cliente...");
-            // System.out.print("Digite la direccion IP o nombre del host a conectar: ");
             System.out.println("Estableciendo la conexión con " + hostIP);
 
             host = new Socket(hostIP, puerto);
             // Capturamos los flujos
-            datosEntrada = new DataInputStream(host.getInputStream());
-            datosSalida = new DataOutputStream(host.getOutputStream());
+            lector = new BufferedReader(new InputStreamReader(host.getInputStream()));
+            escritor = new PrintWriter(host.getOutputStream(), true);
         } catch (IOException e) {
             System.out.println("Error en SockClient.establecerSocket: " + e.getMessage());
         }
@@ -47,78 +50,101 @@ public class SockClient {
      *
      */
     public void enviarMensaje() {
-        Thread hiloEscribir = new Thread(() -> {
+        Thread hiloEnviar = new Thread(() -> {
             try {
                 if (host.isConnected()) {
-                    String mensajeCliente;
-                    //String []informacionCliente = {mensaje, miIp};
                     // Enviamos un mensaje
                     System.out.println("Enviando un mensaje...");
-                    datosSalida.write(mensaje.getBytes());
-                    datosSalida.write(("ip_cliente: " + miIp).getBytes()); //apenas comienza el programa le envio mi ip al servidor
+                    int[] horaMensaje = {Calendar.HOUR_OF_DAY, Calendar.MINUTE, Calendar.SECOND};
+                    mensaje = new Mensaje(mensajeCliente, -1, horaMensaje, "10.20.188.147");
+                    conversacion.add(mensaje);
 
-                    // esperamos una resopuesta por parte del servidor
-                    datosEntrada.read(buffer);
-
-                    //mostrarMensaje(new String(buffer));
-                    //El string respuesta del servidor
-                    String respuestaServidor = new String(buffer);
-
-                    System.out.println("El servidor nos contesta: " + respuestaServidor);
-                    if (!respuestaServidor.isEmpty()) {
-                        mostrarMensaje(mensaje);
-                    } else {
-                        
-                        mensajeCliente = "Cliente:✓ " + mensaje;
-                    }
-                    //System.out.println("Mensaje cliente: " + mensajeCliente);
-                    //CamaleonChat.jTextArea2.append(mensajeCliente);
-                    
+                    escritor.println(conversacion.indexOf(mensaje) + " " + mensaje.getTexto() + "  " + mensaje.getIpReceptor());
                     CamaleonChat.jTextArea1.setText(null);
 
                 } else {
                     System.out.println(host);
                 }
-                //Cuando se cierre la ventana se hace un metodo que llame a estas 3 lineas
-                /*  datosEntrada.close();
-                    datosSalida.close();
-                    host.close();
-                 */
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.out.println("Error en SockCliente.enviarMensaje: " + e.getMessage());
             }
         });
-        hiloEscribir.start();
+
+        hiloEnviar.start();
     }
 
     /**
      * Método para mostrar los mensajes que se reciben desde el servidor
      *
-     * @param mensaje
      */
-    public void mostrarMensaje(String mensaje) {
+    public void mostrarMensaje() {
         Thread hiloLeer = new Thread(() -> {
+            String []mensajeServidor;
             try {
-                lector = new BufferedReader(new InputStreamReader(host.getInputStream()));
-                while (true) {
-                    String msgRecibido = lector.readLine();
-                    System.out.println("El servidor nos contesta: " + mensaje);
-                    CamaleonChat.jTextArea2.append("Cliente#d%:" + mensaje);
+                CamaleonChat.jTextArea2.setText(null);
+                
+                mensajeServidor = lector.readLine().split(" ");
+                cambiarEstados(Integer.parseInt(mensajeServidor[0]), Integer.parseInt(mensajeServidor[2]));
+                
+                for (Mensaje mensaje1 : conversacion) {
+                    
+                    String mensajeVista = "Cliente: " + mensaje1.getTexto();
+
+                    switch (mensaje1.getEstado()) {
+                        case 0: //Enviado
+                            mensajeVista += " ✓";
+                            break;
+                        case 1: //Recibido
+                            mensajeVista += " ✓✓";
+                            break;
+                        case 2: //Leido
+                            mensajeVista += " ✓✓✓";
+                            break;
+                        default: //No ha llegado al servidor
+                            mensajeVista += " ?";
+                            break;
+                    }
+                    
+                    mensajeVista += "\n";
+                    CamaleonChat.jTextArea2.append(mensajeVista);
+                    System.out.println(mensaje1.getTexto() +"|"+ mensaje1.getEstado());
                 }
+
             } catch (IOException ex) {
-                System.out.println("Error en leer el mensaje" + ex.getMessage());
+                CamaleonChat.jTextArea2.append("Error al establecer conexión con el servidor.");
+                System.out.println("Error en SockCliente.mostrarMensaje:" + ex.getMessage());
             }
         });
         hiloLeer.start();
     }
-
-    //Métodos get y set
-    public String getMensaje() {
-
-        return mensaje;
+    
+    private void cambiarEstados(int index, int estado) {
+        Mensaje mensajeTemp = conversacion.get(index);
+        conversacion.remove(index);
+        mensajeTemp.setEstado(estado);
+        conversacion.add(mensajeTemp);
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    public String getMensajeCliente() {
+        return mensajeCliente;
+    }
+
+    public void setMensajeCliente(String mensajeCliente) {
+        this.mensajeCliente = mensajeCliente;
+    }
+
+    public void attachShutDownHook() {
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                try {
+                    // terminamos el procesamiento del socket
+                    host.close();
+                } catch (IOException e) {
+                    System.out.println("Error en ClienteHilado.attachShutDownHook: " + e.getMessage());
+                }
+            }
+        });
+
     }
 }
