@@ -14,9 +14,6 @@ import java.io.PrintWriter;
  */
 public class ClienteHilado extends Thread {
 
-    private String hostIp;
-    private int puerto;
-
     private String[] mensajeCliente;    //
     private final Socket cliente1;
     private Socket hostCliente;
@@ -24,12 +21,11 @@ public class ClienteHilado extends Thread {
     private BufferedReader lector;
     private PrintWriter escritor;
 
-    private byte buffer[]; // Un area de memoria que se utiliza para guardar los datos que leemos del cliente
-
     public ClienteHilado(Socket cliente) {
         this.cliente1 = cliente;
     }
 
+    @Override
     public void run() {
         try {
             // Alguien se ha conectado
@@ -44,26 +40,12 @@ public class ClienteHilado extends Thread {
                 mensajeCliente = lector.readLine().split(" ");
                 System.out.print("* El mensaje que llega de " + cliente1.getInetAddress().getHostAddress());
                 System.out.println(" es: " + mensajeCliente[2]);
-                escribirMensaje(mensajeCliente[1], mensajeCliente[1]);
                 escritor.println(mensajeCliente[0] + " " + mensajeCliente[1] + " 0");
             }
 
         } catch (IOException ex) {
             System.out.println("Error en los datos: " + ex.getMessage());
         }
-    }
-
-    private void escribirMensaje(String hostIp, String mensaje) {
-        try {
-            puerto = 7020;
-            hostCliente = new Socket(hostIp, puerto);
-            lector = new BufferedReader(new InputStreamReader(hostCliente.getInputStream()));
-            escritor = new PrintWriter(hostCliente.getOutputStream(), true);
-            escritor.println(mensaje);
-        } catch (IOException e) {
-            System.out.println("Error en ClienteHilado.escribirMensaje: " + e.getMessage());
-        }
-
     }
 
     public void attachShutDownHook() {

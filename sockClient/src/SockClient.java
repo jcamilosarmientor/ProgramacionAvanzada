@@ -24,11 +24,8 @@ public class SockClient {
     private Mensaje mensaje;
 
     private Socket host;        //socket del servidor
-    private Socket cliente2;    //socket de la persona que se conecta conmigo
-    private ServerSocket host2; //serverSocket para recibir mensajes desde el servidor
 
     private BufferedReader lector;
-    private BufferedReader lectorCliente;
     private PrintWriter escritor;
 
     public SockClient() {
@@ -42,11 +39,8 @@ public class SockClient {
 
             host = new Socket(hostIP, puerto);
             // Capturamos los flujos
-            //host2 = new ServerSocket(7020);
-            //cliente2 = host2.accept();
             lector = new BufferedReader(new InputStreamReader(host.getInputStream()));
             escritor = new PrintWriter(host.getOutputStream(), true);
-            //lectorCliente = new BufferedReader(new InputStreamReader(cliente2.getInputStream()));
         } catch (IOException e) {
             System.out.println("Error en SockClient.establecerSocket: " + e.getMessage());
         }
