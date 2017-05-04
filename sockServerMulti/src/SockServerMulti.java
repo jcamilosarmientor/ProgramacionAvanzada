@@ -16,7 +16,6 @@ public class SockServerMulti {
     private ServerSocket host;
     private Socket cliente;
 
-    private Scanner teclado;
     private int puerto;
 
     private boolean servidorActivado;
@@ -25,7 +24,6 @@ public class SockServerMulti {
     public SockServerMulti() {
         servidorActivado = true;
         puerto = 7010;
-        teclado = new Scanner(System.in);
         clientesConectados = new ArrayList();
 
         // Crear el servidor

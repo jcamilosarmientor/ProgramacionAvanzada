@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,9 +23,12 @@ public class SockClient {
     private ArrayList<Mensaje> conversacion;
     private Mensaje mensaje;
 
-    private Socket host;    //socket del servidor
+    private Socket host;        //socket del servidor
+    private Socket cliente2;    //socket de la persona que se conecta conmigo
+    private ServerSocket host2; //serverSocket para recibir mensajes desde el servidor
 
     private BufferedReader lector;
+    private BufferedReader lectorCliente;
     private PrintWriter escritor;
 
     public SockClient() {
@@ -38,8 +42,11 @@ public class SockClient {
 
             host = new Socket(hostIP, puerto);
             // Capturamos los flujos
+            //host2 = new ServerSocket(7020);
+            //cliente2 = host2.accept();
             lector = new BufferedReader(new InputStreamReader(host.getInputStream()));
             escritor = new PrintWriter(host.getOutputStream(), true);
+            //lectorCliente = new BufferedReader(new InputStreamReader(cliente2.getInputStream()));
         } catch (IOException e) {
             System.out.println("Error en SockClient.establecerSocket: " + e.getMessage());
         }
@@ -59,7 +66,7 @@ public class SockClient {
                     mensaje = new Mensaje(mensajeCliente, -1, horaMensaje, "10.20.188.147");
                     conversacion.add(mensaje);
 
-                    escritor.println(conversacion.indexOf(mensaje) + " " + mensaje.getTexto() + "  " + mensaje.getIpReceptor());
+                    escritor.println(conversacion.indexOf(mensaje) + " " + mensaje.getTexto() + " " + mensaje.getIpReceptor());
                     CamaleonChat.jTextArea1.setText(null);
 
                 } else {
@@ -79,15 +86,14 @@ public class SockClient {
      */
     public void mostrarMensaje() {
         Thread hiloLeer = new Thread(() -> {
-            String []mensajeServidor;
+            String[] mensajeServidor;
             try {
                 CamaleonChat.jTextArea2.setText(null);
-                
                 mensajeServidor = lector.readLine().split(" ");
                 cambiarEstados(Integer.parseInt(mensajeServidor[0]), Integer.parseInt(mensajeServidor[2]));
-                
+
                 for (Mensaje mensaje1 : conversacion) {
-                    
+
                     String mensajeVista = "Cliente: " + mensaje1.getTexto();
 
                     switch (mensaje1.getEstado()) {
@@ -104,10 +110,10 @@ public class SockClient {
                             mensajeVista += " ?";
                             break;
                     }
-                    
+
                     mensajeVista += "\n";
                     CamaleonChat.jTextArea2.append(mensajeVista);
-                    System.out.println(mensaje1.getTexto() +"|"+ mensaje1.getEstado());
+                    System.out.println(mensaje1.getTexto() + "|" + mensaje1.getEstado());
                 }
 
             } catch (IOException ex) {
@@ -117,7 +123,7 @@ public class SockClient {
         });
         hiloLeer.start();
     }
-    
+
     private void cambiarEstados(int index, int estado) {
         Mensaje mensajeTemp = conversacion.get(index);
         conversacion.remove(index);
