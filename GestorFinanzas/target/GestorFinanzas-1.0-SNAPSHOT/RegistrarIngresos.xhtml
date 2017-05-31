@@ -3,23 +3,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <!-- <ui:composition template="./../../main.xhtml"> -->
-        <ui:composition template="main.xhtml">
+        <ui:composition template="index.xhtml">
             <ui:define name="content">
-                <h2> Registrar Gasto </h2>
-                <h:panelGrid columns="2" cellpadding="10" >
-                    <p:outputLabel for="inputDescripcion" value="Descripción: " />
-                    <p:inputTextarea id="inputDescripcion" cols="100"/>
-                    
-                    <p:outputLabel for="inputValor" value="Valor: " />
-                    <p:inputNumber id="inputValor" size="100"/>
-                </h:panelGrid>
-            </ui:define>
+                <h:form style="height:100%; width:100%; margin-top:20px;">
+                    <p:growl id="growl" showDetail="true" showSummary="false" sticky="true"/>
+                    <p:panel header="Registrar Ingresos">
+                        <h:panelGrid columns="3" cellpadding="10" id="grid">
+                            <h:outputLabel for="inputDescripcion" value="Descripción: " style="font-weight:bold"/>
+                            <p:inputTextarea id="inputDescripcion" cols="100" required="true" label="Descripción">
+                                <f:validateLength minimum="10" maximum="100" /> 
+                            </p:inputTextarea>
+                            <br></br>
 
+                            <h:outputLabel for="inputValor" value="Valor: " style="font-weight:bold"/>
+                            <p:inputNumber id="inputValor" size="100" required="true" label="Valor"/>
+                            <br></br>
+                            
+                            <p:commandButton value="Guardar" validateClient="true" update="growl"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </ui:define>
         </ui:composition>
 
     </body>

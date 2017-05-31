@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="resources/style/index_styles.css" />
+        <script type="text/javascript" src="resources/js/vertical_menu_script.js"></script>
+        <title>Gestor Finanzas</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:toolbar class="barraSuperior">
+                <f:facet name="left">
+                    <div id="btnSuperior"><p:commandButton type="button" icon="fa fa-bars"/></div>
+                </f:facet>
+
+                <f:facet name="right">
+                    <p:commandButton type="button" value="New" icon="ui-icon-document" />
+
+                    <p:commandButton type="button" value="Open" icon="ui-icon-folder-open" />
+
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+
+                    <p:commandButton type="button" title="Save" icon="ui-icon-disk" />
+                    <p:commandButton type="button" title="Delete" icon="ui-icon-trash" />
+                    <p:commandButton type="button" title="Print" icon="ui-icon-print" />
+                </f:facet>
+            </p:toolbar>
+
+            <!-- Menu vertical -->
+            <div id="menu">
+                <p:menu class="menuVertial">
+                    <p:submenu label="Ingresos">
+                        <p:menuitem value="Registrar Ingresos" actionListener="#{menuView.save}" url="RegistrarIngresos.gestor"/>
+                        <p:menuitem value="Listar Ingresos" actionListener="#{menuView.update}"  url="ListarIngresos.gestor"/>
+                        <p:menuitem value="Fecha Límite" actionListener="#{menuView.update}"  url="ListarIngresos.gestor"/>
+                    </p:submenu>
+                    <p:submenu label="Gastos">
+                        <p:menuitem value="Registrar Gastos" actionListener="#{menuView.save}" url="RegistrarGastos.gestor"/>
+                        <p:menuitem value="Listar Gastos" actionListener="#{menuView.update}"  url="ListarGastos.gestor"/>
+                        <p:submenu label="Categoría">
+                            <p:menuitem value="Registrar Categorías" actionListener="#{menuView.save}" url="RegistrarCategoria.gestor"/>
+                            <p:menuitem value="Listar Categorías" actionListener="#{menuView.update}"  url="ListarCategorias.gestor"/>
+                        </p:submenu>
+                    </p:submenu>
+                    <p:submenu label="Balance"></p:submenu>
+                </p:menu>
+            </div>
+        </h:form>
+        <!-- contenido principal -->
+        <div id="contenido" class="contenidoPrincipal">
+
+            <ui:insert name="content">
+                PRINCIPAL
+            </ui:insert>
+
+        </div>
+    </h:body>
+</html>
+

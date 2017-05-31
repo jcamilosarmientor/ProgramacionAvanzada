@@ -9,27 +9,35 @@
     <body>
 
         <!-- <ui:composition template="./../../main.xhtml"> -->
-        <ui:composition template="main.xhtml">
+        <ui:composition template="index.xhtml">
             <ui:define name="content">
-                <h2> Registrar Gasto </h2>
-                <h:panelGrid columns="2" cellpadding="10" >
-                    <p:outputLabel for="inputValor" value="Valor: " />
-                    <p:inputNumber id="inputValor" size="100"/>
+                <h:form style="height:95%; width:100%; margin-top:20px;">
+                    <p:growl id="growl" showDetail="true" showSummary="false" sticky="true"/>
+                    <p:panel header="Registrar Gasto">
+                        <h:panelGrid columns="2" cellpadding="10" >
+                            <p:outputLabel for="inputValor" value="Valor: " />
+                            <p:inputNumber id="inputValor" size="100" required="true"/>
 
-                    <p:outputLabel for="inputCategoria" value="Categoria: " />
-                    <p:selectOneMenu id="inputCategoria">
-                        <f:selectItem itemValue="-1" itemLabel="Seleccione una Categoría" />
-                    </p:selectOneMenu>
+                            <p:outputLabel for="inputCategoria" value="Categoria: " />
+                            <p:selectOneMenu id="inputCategoria" required="true">
+                                <f:selectItem itemValue="-1" itemLabel="Seleccione una Categoría" />
+                            </p:selectOneMenu>
 
-                    <p:outputLabel for="inputDescripcion" value="Descripción: " />
-                    <p:inputTextarea id="inputDescripcion" cols="100"/>
+                            <p:outputLabel for="inputDescripcion" value="Descripción: " />
+                            <p:inputTextarea id="inputDescripcion" cols="100" required="true">
+                                <f:validateLength minimum="10" maximum="100" /> 
+                            </p:inputTextarea>
 
-                    <p:outputLabel for="inputFecha" value="Fecha: " />
-                    <p:calendar id="inputFecha" size="100"/>
+                            <p:outputLabel for="inputFecha" value="Fecha: " />
+                            <p:calendar id="inputFecha" size="100" required="true"/>
 
-                    <p:outputLabel for="inputLugar" value="Lugar: " />
-                    <p:inputText id="inputLugar" size="100"/>
-                </h:panelGrid>
+                            <p:outputLabel for="inputLugar" value="Lugar: " />
+                            <p:inputText id="inputLugar" size="100"/>
+                            
+                            <p:commandButton value="Guardar" update="growl" validateClient="true" />
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
             </ui:define>
         </ui:composition>
 
