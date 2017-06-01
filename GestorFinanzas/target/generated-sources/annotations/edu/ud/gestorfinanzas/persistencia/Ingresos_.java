@@ -9,10 +9,11 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-29T20:06:45")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-30T22:48:27")
 @StaticMetamodel(Ingresos.class)
 public class Ingresos_ { 
 
+    public static volatile SingularAttribute<Ingresos, String> descripcion;
     public static volatile CollectionAttribute<Ingresos, IngresosExtra> ingresosExtraCollection;
     public static volatile CollectionAttribute<Ingresos, RelacionGastosIngresos> relacionGastosIngresosCollection;
     public static volatile SingularAttribute<Ingresos, Date> fechaRegistro;

@@ -8,7 +8,6 @@ package edu.ud.gestorfinanzas.persistencia;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,7 +24,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "fecha_limite_ingresos")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "FechaLimiteIngresos.findAll", query = "SELECT f FROM FechaLimiteIngresos f")
     , @NamedQuery(name = "FechaLimiteIngresos.findById", query = "SELECT f FROM FechaLimiteIngresos f WHERE f.id = :id")
@@ -45,7 +41,7 @@ public class FechaLimiteIngresos implements Serializable {
     private Short diaInicio;
     @Column(name = "dia_fin")
     private Short diaFin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fechaLimiteIngresosId")
+    @OneToMany(mappedBy = "fechaLimiteIngresosId")
     private Collection<Ingresos> ingresosCollection;
 
     public FechaLimiteIngresos() {
@@ -79,7 +75,6 @@ public class FechaLimiteIngresos implements Serializable {
         this.diaFin = diaFin;
     }
 
-    @XmlTransient
     public Collection<Ingresos> getIngresosCollection() {
         return ingresosCollection;
     }

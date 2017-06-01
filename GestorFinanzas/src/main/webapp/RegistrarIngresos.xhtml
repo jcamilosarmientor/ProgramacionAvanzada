@@ -16,16 +16,25 @@
                     <p:panel header="Registrar Ingresos">
                         <h:panelGrid columns="3" cellpadding="10" id="grid">
                             <h:outputLabel for="inputDescripcion" value="Descripción: " style="font-weight:bold"/>
-                            <p:inputTextarea id="inputDescripcion" cols="100" required="true" label="Descripción">
+                            <p:inputTextarea id="inputDescripcion" cols="100" value="#{ingresosManagedBean.descripcion}" 
+                                             required="true" label="Descripción">
                                 <f:validateLength minimum="10" maximum="100" /> 
                             </p:inputTextarea>
                             <br></br>
 
                             <h:outputLabel for="inputValor" value="Valor: " style="font-weight:bold"/>
-                            <p:inputNumber id="inputValor" size="100" required="true" label="Valor"/>
+                            <p:inputNumber id="inputValor" size="100" value="#{ingresosManagedBean.valor}" required="true" label="Valor"/>
                             <br></br>
                             
-                            <p:commandButton value="Guardar" validateClient="true" update="growl"/>
+                            <p:outputLabel for="inputFechaLimite" value="Fechas: " style="font-weight:bold"/>
+                            <p:selectOneMenu id="inputFechaLimite" required="true" value="#{ingresosManagedBean.idfechaLimite}">
+                                <f:selectItem itemValue="-1" itemLabel="Seleccione un rango de días" itemDisabled="true"/>
+                                <f:selectItems value="#{fechaLimiteManagedBean.fechasLimites}" var="fechas" 
+                                               itemLabel="#{fechas.diaInicio} - #{fechas.diaFin}" itemValue="#{fechas.id}"/>
+                            </p:selectOneMenu>
+                            <br></br>
+                            
+                            <p:commandButton value="Guardar" actionListener="#{ingresosManagedBean.guardar()}" validateClient="true" update="growl"/>
                         </h:panelGrid>
                     </p:panel>
                 </h:form>

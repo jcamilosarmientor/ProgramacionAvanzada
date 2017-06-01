@@ -24,8 +24,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -33,12 +32,12 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "ingresos")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Ingresos.findAll", query = "SELECT i FROM Ingresos i")
     , @NamedQuery(name = "Ingresos.findById", query = "SELECT i FROM Ingresos i WHERE i.id = :id")
     , @NamedQuery(name = "Ingresos.findByValor", query = "SELECT i FROM Ingresos i WHERE i.valor = :valor")
-    , @NamedQuery(name = "Ingresos.findByFechaRegistro", query = "SELECT i FROM Ingresos i WHERE i.fechaRegistro = :fechaRegistro")})
+    , @NamedQuery(name = "Ingresos.findByFechaRegistro", query = "SELECT i FROM Ingresos i WHERE i.fechaRegistro = :fechaRegistro")
+    , @NamedQuery(name = "Ingresos.findByDescripcion", query = "SELECT i FROM Ingresos i WHERE i.descripcion = :descripcion")})
 public class Ingresos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,8 +55,13 @@ public class Ingresos implements Serializable {
     @Column(name = "fecha_registro")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaRegistro;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "descripcion")
+    private String descripcion;
     @JoinColumn(name = "fecha_limite_ingresos_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private FechaLimiteIngresos fechaLimiteIngresosId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingresosId")
     private Collection<IngresosExtra> ingresosExtraCollection;
@@ -71,10 +75,11 @@ public class Ingresos implements Serializable {
         this.id = id;
     }
 
-    public Ingresos(Integer id, double valor, Date fechaRegistro) {
+    public Ingresos(Integer id, double valor, Date fechaRegistro, String descripcion) {
         this.id = id;
         this.valor = valor;
         this.fechaRegistro = fechaRegistro;
+        this.descripcion = descripcion;
     }
 
     public Integer getId() {
@@ -101,6 +106,14 @@ public class Ingresos implements Serializable {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public FechaLimiteIngresos getFechaLimiteIngresosId() {
         return fechaLimiteIngresosId;
     }
@@ -109,7 +122,6 @@ public class Ingresos implements Serializable {
         this.fechaLimiteIngresosId = fechaLimiteIngresosId;
     }
 
-    @XmlTransient
     public Collection<IngresosExtra> getIngresosExtraCollection() {
         return ingresosExtraCollection;
     }
@@ -118,7 +130,6 @@ public class Ingresos implements Serializable {
         this.ingresosExtraCollection = ingresosExtraCollection;
     }
 
-    @XmlTransient
     public Collection<RelacionGastosIngresos> getRelacionGastosIngresosCollection() {
         return relacionGastosIngresosCollection;
     }

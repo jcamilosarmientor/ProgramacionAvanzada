@@ -25,8 +25,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,7 +32,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "gastos")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Gastos.findAll", query = "SELECT g FROM Gastos g")
     , @NamedQuery(name = "Gastos.findById", query = "SELECT g FROM Gastos g WHERE g.id = :id")
@@ -124,7 +121,6 @@ public class Gastos implements Serializable {
         this.lugar = lugar;
     }
 
-    @XmlTransient
     public Collection<RelacionGastosIngresos> getRelacionGastosIngresosCollection() {
         return relacionGastosIngresosCollection;
     }

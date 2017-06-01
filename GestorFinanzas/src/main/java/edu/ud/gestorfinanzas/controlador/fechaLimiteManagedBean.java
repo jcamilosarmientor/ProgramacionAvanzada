@@ -5,21 +5,42 @@
  */
 package edu.ud.gestorfinanzas.controlador;
 
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import edu.ud.gestorfinanzas.ejb.FechaLimiteIngresosFacade;
+import edu.ud.gestorfinanzas.ejb.FechaLimiteIngresosFacadeLocal;
+import edu.ud.gestorfinanzas.persistencia.FechaLimiteIngresos;
+import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.view.ViewScoped;
 
 /**
  *
  * @author Juan Camilo
  */
-@Named(value = "fechaLimiteManagedBean")
-@Dependent
-public class fechaLimiteManagedBean {
+@ManagedBean
+@ViewScoped
+public class fechaLimiteManagedBean implements Serializable {
 
-    /**
-     * Creates a new instance of fechaLimiteManagedBean
-     */
+    @EJB
+    private FechaLimiteIngresosFacadeLocal fechaLimiteIngresosEJB;
+
+    private List<FechaLimiteIngresos> fechasLimites;
+
+    @PostConstruct
+    public void init() {
+        fechasLimites = fechaLimiteIngresosEJB.findAll();
+    }
+
     public fechaLimiteManagedBean() {
     }
-    
+
+    public List<FechaLimiteIngresos> getFechasLimites() {
+        return fechasLimites;
+    }
+
+    public void setFechasLimites(List<FechaLimiteIngresos> fechasLimites) {
+        this.fechasLimites = fechasLimites;
+    }
 }
