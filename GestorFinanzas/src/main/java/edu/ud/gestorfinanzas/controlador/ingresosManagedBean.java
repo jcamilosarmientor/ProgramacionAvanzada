@@ -42,6 +42,7 @@ public class IngresosManagedBean implements Serializable {
     public void init() {
         ingresos = new Ingresos();
         listaIngresos = ingresosEJB.findAll();
+        System.out.println("Lista de Ingresos: " + listaIngresos);
     }
 
     public IngresosManagedBean() {

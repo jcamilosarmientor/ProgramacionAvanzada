@@ -10,18 +10,29 @@
         <ui:composition template="index.xhtml">
 
             <ui:define name="content">
-                <p:dataTable var="car" value="#{ingresosManagedBean.listaIngresos}" emptyMessage="No hay registros">
-                    <p:column headerText="Valor">
-                        <h:outputText value="#{car.id}" />
-                    </p:column>
+                <p:dataTable var="ingresos" value="#{ingresosManagedBean.listaIngresos}" emptyMessage="No hay registros">
 
-                    <p:column headerText="Categoria">
-                        <h:outputText value="#{car.year}" />
-                    </p:column>
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column headerText="Valor" rowspan="2">
+                                <h:outputText value="#{ingresos.valor}" />
+                            </p:column>
+                            <p:column headerText="Fecha de Registro" rowspan="2">
+                                <h:outputText value="#{ingresos.fechaRegistro}" />
+                            </p:column>
+                            <p:column colspan="2" headerText="Límite de Gastos" />
+                        </p:row>
 
-                    <p:column headerText="Fecha Registro">
-                        <h:outputText value="#{car.brand}" />
-                    </p:column>
+                        <p:row>
+                            <p:column headerText="Inicio">
+                                <h:outputText value="#{ingresos.fechaLimiteIngresosId.diaInicio}" />
+                            </p:column>
+                            <p:column headerText="Fin">
+                                <h:outputText value="#{ingresos.fechaLimiteIngresosId.diaInicio}" />
+                            </p:column>
+                        </p:row>
+                    </p:columnGroup>
+
                 </p:dataTable>
             </ui:define>
 
