@@ -20,9 +20,9 @@ import javax.faces.view.ViewScoped;
  * @author Juan Camilo Sarmiento
  */
 @ManagedBean
-//@Named(value = "ingresosManagedBean")
+@Named(value = "ingresosManagedBean")
 @ViewScoped
-public class ingresosManagedBean implements Serializable {
+public class IngresosManagedBean implements Serializable {
 
     @EJB
     private IngresosFacadeLocal ingresosEJB;
@@ -44,7 +44,7 @@ public class ingresosManagedBean implements Serializable {
         listaIngresos = ingresosEJB.findAll();
     }
 
-    public ingresosManagedBean() {
+    public IngresosManagedBean() {
     }
 
     public void guardar() {
@@ -54,10 +54,10 @@ public class ingresosManagedBean implements Serializable {
             ingresos.setFechaRegistro(new Date());
             ingresos.setFechaLimiteIngresosId(new FechaLimiteIngresos(idfechaLimite));
             ingresosEJB.create(ingresos);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"","Ingreso Registrado"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto","Ingreso Registrado"));
         } catch (Exception e) {
             System.out.println("Error en ingresosManagedBeand.guardar() " + e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Error al Registrar Ingreso"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Error al Registrar Ingreso"));
         }
     }
 
@@ -91,5 +91,13 @@ public class ingresosManagedBean implements Serializable {
 
     public void setIdfechaLimite(int idfechaLimite) {
         this.idfechaLimite = idfechaLimite;
+    }
+
+    public List<Ingresos> getListaIngresos() {
+        return listaIngresos;
+    }
+
+    public void setListaIngresos(List<Ingresos> listaIngresos) {
+        this.listaIngresos = listaIngresos;
     }
 }

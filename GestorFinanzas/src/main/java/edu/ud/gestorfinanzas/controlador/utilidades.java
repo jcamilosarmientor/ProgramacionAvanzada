@@ -12,7 +12,7 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class utilidades implements Serializable{
+public class Utilidades implements Serializable{
     
     private String icono;
     
