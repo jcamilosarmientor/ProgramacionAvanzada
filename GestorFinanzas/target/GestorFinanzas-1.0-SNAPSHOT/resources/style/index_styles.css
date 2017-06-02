@@ -21,12 +21,11 @@
 }
 
 .contenidoPrincipal {
-    border: 1px solid;
     margin-left: 18.5%;
     width: 80%;
     height: 100%;
     float: right;
-    position: fixed;
+    position: relative;
     overflow: auto;
     display: flex;
     justify-content: center;

@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,6 +29,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "categoria_gastos")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CategoriaGastos.findAll", query = "SELECT c FROM CategoriaGastos c")
     , @NamedQuery(name = "CategoriaGastos.findById", query = "SELECT c FROM CategoriaGastos c WHERE c.id = :id")
@@ -44,7 +47,7 @@ public class CategoriaGastos implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoriaGastosId")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "categoriaGastosId")
     private Collection<Gastos> gastosCollection;
 
     public CategoriaGastos() {
@@ -75,6 +78,7 @@ public class CategoriaGastos implements Serializable {
         this.nombre = nombre;
     }
 
+    @XmlTransient
     public Collection<Gastos> getGastosCollection() {
         return gastosCollection;
     }

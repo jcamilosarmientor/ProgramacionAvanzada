@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <!-- <ui:composition template="./../../main.xhtml"> -->
+        <ui:composition template="index.xhtml">
+            <ui:define name="content">
+                <p:chart type="line" model="#{balance.lineModel1}" style="height:80%;width:60%;margin-top:20px;" responsive="true"/>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

@@ -16,25 +16,34 @@
                     <p:panel header="Registrar Gasto">
                         <h:panelGrid columns="2" cellpadding="10" >
                             <p:outputLabel for="inputValor" value="Valor: " />
-                            <p:inputNumber id="inputValor" size="100" required="true"/>
+                            <p:inputNumber id="inputValor" size="100" required="true" value="#{gastos.valor}"/>
 
                             <p:outputLabel for="inputCategoria" value="Categoria: " />
-                            <p:selectOneMenu id="inputCategoria" required="true">
-                                <f:selectItem itemValue="-1" itemLabel="Seleccione una Categoría" />
+                            <p:selectOneMenu id="inputCategoria" required="true" value="#{gastos.idCategoriaGastos}" >
+                                <f:selectItem itemValue="-1" itemLabel="Selecciona una Categoría: " />
+                                <f:selectItems value="#{categoriaGastos.listaCategoriasGastos}" var="categoria"
+                                               itemLabel="#{categoria.nombre}" itemValue="#{categoria.id}" />
                             </p:selectOneMenu>
 
                             <p:outputLabel for="inputDescripcion" value="Descripción: " />
-                            <p:inputTextarea id="inputDescripcion" cols="100" required="true">
+                            <p:inputTextarea id="inputDescripcion" cols="100" required="true" value="#{gastos.descripcion}" >
                                 <f:validateLength minimum="10" maximum="100" /> 
                             </p:inputTextarea>
 
-                            <p:outputLabel for="inputFecha" value="Fecha: " />
-                            <p:calendar id="inputFecha" size="100" required="true"/>
+                            <p:outputLabel for="inputFecha" value="Fecha: "  />
+                            <p:calendar id="inputFecha" size="100" required="true" value="#{gastos.fechaRegistro}"/>
 
                             <p:outputLabel for="inputLugar" value="Lugar: " />
-                            <p:inputText id="inputLugar" size="100"/>
+                            <p:inputText id="inputLugar" size="100" value="#{gastos.lugar}"/>
                             
-                            <p:commandButton value="Guardar" update="growl" validateClient="true" />
+                            <p:outputLabel for="inputIngreso" value="Ingreso: " />
+                            <p:selectOneMenu id="inputIngreso" required="true" value="#{gastos.idIngreso}">
+                                <f:selectItem itemValue="-1" itemLabel="Selecciona el Ingreso: " />
+                                <f:selectItems value="#{ingresos.listaIngresos}" var="ingreso"
+                                               itemLabel="#{ingreso.descripcion}" itemValue="#{ingreso.id}" />
+                            </p:selectOneMenu>
+
+                            <p:commandButton value="Guardar" update="growl" validateClient="true" actionListener="#{gastos.guardar()}"/>
                         </h:panelGrid>
                     </p:panel>
                 </h:form>

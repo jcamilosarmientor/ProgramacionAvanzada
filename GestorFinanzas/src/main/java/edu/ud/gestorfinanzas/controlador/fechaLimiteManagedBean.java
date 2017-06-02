@@ -10,26 +10,29 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author Juan Camilo Sarmiento Reyes
  */
 @ManagedBean
+@Named(value = "fechaLimiteManagedBean")
 @ViewScoped
 public class FechaLimiteManagedBean implements Serializable {
 
     @EJB
     private FechaLimiteIngresosFacadeLocal fechaLimiteIngresosEJB;
     
-    private int diaInicio;
-    private int diaFinal;
+    private short diaInicio;
+    private short diaFinal;
     
     private FechaLimiteIngresos fechaLimiteIngresos;
     private List<FechaLimiteIngresos> listaFechasLimites;
 
     @PostConstruct
     public void init() {
+        fechaLimiteIngresos = new FechaLimiteIngresos();
         listaFechasLimites = fechaLimiteIngresosEJB.findAll();
     }
 
@@ -37,6 +40,9 @@ public class FechaLimiteManagedBean implements Serializable {
     
     public void guardar() {
         try {
+            fechaLimiteIngresos.setDiaInicio(diaInicio);
+            fechaLimiteIngresos.setDiaFin(diaFinal);
+            fechaLimiteIngresosEJB.create(fechaLimiteIngresos);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto","Nuevo Periodo de Gastos Registrado"));
         } catch (Exception e) {
             System.out.println("Error en FechaLimiteManagedBean.guardar(): " + e.getMessage());
@@ -52,19 +58,19 @@ public class FechaLimiteManagedBean implements Serializable {
         this.listaFechasLimites = listaFechasLimites;
     }
 
-    public int getDiaInicio() {
+    public short getDiaInicio() {
         return diaInicio;
     }
 
-    public void setDiaInicio(int diaInicio) {
+    public void setDiaInicio(short diaInicio) {
         this.diaInicio = diaInicio;
     }
 
-    public int getDiaFinal() {
+    public short getDiaFinal() {
         return diaFinal;
     }
 
-    public void setDiaFinal(int diaFinal) {
+    public void setDiaFinal(short diaFinal) {
         this.diaFinal = diaFinal;
     }
 }

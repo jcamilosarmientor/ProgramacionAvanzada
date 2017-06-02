@@ -3,32 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="index.xhtml">
 
             <ui:define name="content">
-                <p:dataTable var="car" value="#{dtBasicView.cars}" emptyMessage="No hay registros">
+                <p:dataTable var="gasto" value="#{gastos.listaGastos}" emptyMessage="No hay registros" style="margin-top: 20px;">
                     <p:column headerText="Valor">
-                        <h:outputText value="#{car.id}" />
+                        <h:outputText value="#{gasto.valor}"  />
                     </p:column>
 
                     <p:column headerText="Categoria">
-                        <h:outputText value="#{car.year}" />
+                        <h:outputText value="#{gasto.categoriaGastosId.nombre}"  />
                     </p:column>
 
                     <p:column headerText="Descripcion">
-                        <h:outputText value="#{car.brand}" />
+                        <h:outputText value="#{gasto.descripcion}"  />
                     </p:column>
                     
                     <p:column headerText="Fecha">
-                        <h:outputText value="#{car.brand}" />
+                        <h:outputText value="#{gasto.fechaRegistro}"  >
+                             <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
                     </p:column>
                     
                     <p:column headerText="Lugar">
-                        <h:outputText value="#{car.brand}" />
+                        <h:outputText value="#{gasto.lugar}" />
                     </p:column>
                 </p:dataTable>
             </ui:define>

@@ -1,10 +1,13 @@
 package edu.ud.gestorfinanzas.controlador;
 
 import edu.ud.gestorfinanzas.ejb.FechaLimiteIngresosFacadeLocal;
+import edu.ud.gestorfinanzas.ejb.IngresosExtraFacadeLocal;
 import edu.ud.gestorfinanzas.ejb.IngresosFacadeLocal;
 import edu.ud.gestorfinanzas.persistencia.FechaLimiteIngresos;
 import edu.ud.gestorfinanzas.persistencia.Ingresos;
+import edu.ud.gestorfinanzas.persistencia.IngresosExtra;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -20,7 +23,7 @@ import javax.faces.view.ViewScoped;
  * @author Juan Camilo Sarmiento
  */
 @ManagedBean
-@Named(value = "ingresosManagedBean")
+@Named(value = "ingresos")
 @ViewScoped
 public class IngresosManagedBean implements Serializable {
 
@@ -29,20 +32,24 @@ public class IngresosManagedBean implements Serializable {
     
     @EJB
     private FechaLimiteIngresosFacadeLocal fechaLimiteIngresosEJB;
+    
+    @EJB
+    private IngresosExtraFacadeLocal ingresosExtraEJB;
 
     private int id;
     private double valor;
     private String descripcion;
     private int idfechaLimite;
+    private double total;
 
     private Ingresos ingresos;
     private List<Ingresos> listaIngresos;
+    private List<IngresosExtra> listaIngresosExtra;
 
     @PostConstruct
     public void init() {
         ingresos = new Ingresos();
         listaIngresos = ingresosEJB.findAll();
-        System.out.println("Lista de Ingresos: " + listaIngresos);
     }
 
     public IngresosManagedBean() {
@@ -60,6 +67,18 @@ public class IngresosManagedBean implements Serializable {
             System.out.println("Error en ingresosManagedBeand.guardar() " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Error al Registrar Ingreso"));
         }
+    }
+    
+    public void obtenerIngresosExtra(Ingresos ingreso) {
+        this.listaIngresosExtra = new ArrayList<>();
+        System.out.println("Id ingreso: " + ingreso.getId());
+        for (IngresosExtra ingresoExtra : ingresosExtraEJB.findAll()) {
+            if(ingresoExtra.getIngresosId().getId() == ingreso.getId()) {
+                listaIngresosExtra.add(ingresoExtra);
+                System.out.println("Valor:" + ingresoExtra.getValor());
+            }
+        }
+        System.out.println("Lista Ingresos Extra: " + listaIngresosExtra);
     }
 
     public int getId() {
@@ -100,5 +119,21 @@ public class IngresosManagedBean implements Serializable {
 
     public void setListaIngresos(List<Ingresos> listaIngresos) {
         this.listaIngresos = listaIngresos;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public List<IngresosExtra> getListaIngresosExtra() {
+        return listaIngresosExtra;
+    }
+
+    public void setListaIngresosExtra(List<IngresosExtra> listaIngresosExtra) {
+        this.listaIngresosExtra = listaIngresosExtra;
     }
 }

@@ -3,6 +3,7 @@ package edu.ud.gestorfinanzas.controlador;
 import edu.ud.gestorfinanzas.ejb.IngresosExtraFacadeLocal;
 import edu.ud.gestorfinanzas.persistencia.Ingresos;
 import edu.ud.gestorfinanzas.persistencia.IngresosExtra;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -18,9 +19,9 @@ import javax.faces.view.ViewScoped;
  * @author Juan Camilo Sarmiento Reyes
  */
 @ManagedBean
-@Named(value = "ingresosExtraManagedBean")
+@Named(value = "ingresoExtra")
 @ViewScoped
-public class IngresosExtraManagedBean {
+public class IngresosExtraManagedBean implements Serializable{
 
     @EJB
     private IngresosExtraFacadeLocal ingresosExtraEJB;
@@ -47,7 +48,7 @@ public class IngresosExtraManagedBean {
             ingresosExtraEJB.create(ingresoExtra);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto","Ingreso Adicional Registrado"));
         } catch (Exception e) {
-            System.out.println("IngresosExtraManagedBean.guadar(): " + e.getMessage());
+            System.err.println("IngresosExtraManagedBean.guadar(): " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Error al Registrar el Ingreso Adicional"));
         }
     }

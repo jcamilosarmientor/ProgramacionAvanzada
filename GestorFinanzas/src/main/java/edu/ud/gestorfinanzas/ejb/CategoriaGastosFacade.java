@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CategoriaGastosFacade extends AbstractFacade<CategoriaGastos> implements CategoriaGastosFacadeLocal {
 
-    @PersistenceContext(unitName = "com.mycompany_GestorFinanzas_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "GestorFinanzasUP")
     private EntityManager em;
 
     @Override

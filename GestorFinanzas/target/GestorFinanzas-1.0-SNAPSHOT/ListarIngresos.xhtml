@@ -3,37 +3,71 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="index.xhtml">
 
             <ui:define name="content">
-                <p:dataTable var="ingresos" value="#{ingresosManagedBean.listaIngresos}" emptyMessage="No hay registros">
+                <h:form id="form">
 
-                    <p:columnGroup type="header">
-                        <p:row>
-                            <p:column headerText="Valor" rowspan="2">
-                                <h:outputText value="#{ingresos.valor}" />
-                            </p:column>
-                            <p:column headerText="Fecha de Registro" rowspan="2">
-                                <h:outputText value="#{ingresos.fechaRegistro}" />
-                            </p:column>
-                            <p:column colspan="2" headerText="Límite de Gastos" />
-                        </p:row>
+                    <p:dataTable var="ingreso" value="#{ingresos.listaIngresos}" emptyMessage="No hay registros" style="margin-top: 20px;">
 
-                        <p:row>
+                        <p:columnGroup type="header">
+                            <p:row>
+                                <p:column rowspan="2" headerText="Valor" />
+                                <p:column rowspan="2" headerText="Fecha Registro" />
+                                <p:column colspan="3" headerText="Periodo" />
+                            </p:row>
+                            <p:row>
+                                <p:column headerText="Día Inicio" />
+                                <p:column headerText="Día Fin" />
+                                <p:column headerText="Ver Ingresos Adicionales" />
+                            </p:row>
+                        </p:columnGroup>
+
+                        <p:subTable value="Ingreso: #{ingreso}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{ingreso.descripcion}" />
+                            </f:facet>
+                            <p:column headerText="Valor" rowspan="2" >
+                                <h:outputText value="#{ingreso.valor}" >
+                                    <f:convertNumber type="currency" currencySymbol="$"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Fecha de Registro">
+                                <h:outputText value="#{ingreso.fechaRegistro}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
                             <p:column headerText="Inicio">
-                                <h:outputText value="#{ingresos.fechaLimiteIngresosId.diaInicio}" />
+                                <h:outputText value="#{ingreso.fechaLimiteIngresosId.diaInicio}" />
                             </p:column>
                             <p:column headerText="Fin">
-                                <h:outputText value="#{ingresos.fechaLimiteIngresosId.diaInicio}" />
+                                <h:outputText value="#{ingreso.fechaLimiteIngresosId.diaFin}" />
                             </p:column>
-                        </p:row>
-                    </p:columnGroup>
+                            <p:column style="width:32px;text-align: center">
+                                <p:commandButton update=":form:listaIngresosTab" oncomplete="PF('listDialog').show()" actionListener="#{ingresos.obtenerIngresosExtra(ingreso)}" icon="ui-icon-search" title="View" />
+                            </p:column>
+                        </p:subTable>
+                    </p:dataTable>
 
-                </p:dataTable>
+                    <p:dialog header="Ingresos Adicionales" widgetVar="listDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <p:dataTable var="minIngresoExtra" value="#{ingresos.listaIngresosExtra}" style="text-align:center;" 
+                                     id="listaIngresosTab" emptyMessage="No Existen Ingresos Adicionales Registrados">
+                            <f:facet name="header">
+                                <h:outputText value="Ingresos Adicionales"/>
+                            </f:facet>
+                            <p:column headerText="Valor">
+                                <h:outputText value="#{minIngresoExtra.valor}" >
+                                    <f:convertNumber type="currency" currencySymbol="$"/>
+                                </h:outputText>
+                            </p:column>
+                        </p:dataTable>
+                    </p:dialog>
+                </h:form>
             </ui:define>
 
         </ui:composition>

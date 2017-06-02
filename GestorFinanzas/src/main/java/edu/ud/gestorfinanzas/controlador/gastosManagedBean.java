@@ -12,18 +12,18 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 
 /**
  *
  * @author Juan Camilo Sarmiento Reyes
  */
 @ManagedBean
-@Named(value = "gastosManagedBean")
-@Dependent
+@Named(value = "gastos")
+@ViewScoped
 public class GastosManagedBean implements Serializable {
 
     @EJB
@@ -34,10 +34,11 @@ public class GastosManagedBean implements Serializable {
     
     private double valor;
     private String descripcion;
+    private Date fechaRegistro;
     private String lugar;
     private int idCategoriaGastos;
-    private int idIngreo;
-    
+    private int idIngreso;
+   
     private Gastos gasto;
     private List<Gastos> listaGastos;
     
@@ -56,12 +57,12 @@ public class GastosManagedBean implements Serializable {
         try {
             gasto.setValor(valor);
             gasto.setDescripcion(descripcion);
-            gasto.setFechaRegistro(new Date());
+            gasto.setFechaRegistro(fechaRegistro);
             gasto.setLugar(lugar);
             gasto.setCategoriaGastosId(new CategoriaGastos(idCategoriaGastos));
             gastosEJB.create(gasto);
             //Acá comienza el rgistro de la relación gastos ingresos
-            relacionGastosIngresos.setIngresosId(new Ingresos(idIngreo));
+            relacionGastosIngresos.setIngresosId(new Ingresos(idIngreso));
             relacionGastosIngresos.setGastosId(gasto);
             System.out.println("Creando relación gastos ingresos...");
             relacionGastosIngresosEJB.create(relacionGastosIngresos);
@@ -120,4 +121,20 @@ public class GastosManagedBean implements Serializable {
     public void setListaGastos(List<Gastos> listaGastos) {
         this.listaGastos = listaGastos;
     }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public int getIdIngreso() {
+        return idIngreso;
+    }
+
+    public void setIdIngreso(int idIngreso) {
+        this.idIngreso = idIngreso;
+    }    
 }

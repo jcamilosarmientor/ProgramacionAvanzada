@@ -37,19 +37,22 @@
             <div id="menu">
                 <p:menu class="menuVertial">
                     <p:submenu label="Ingresos">
-                        <p:menuitem value="Registrar Ingresos" actionListener="#{menuView.save}" url="RegistrarIngresos.gestor"/>
-                        <p:menuitem value="Listar Ingresos" actionListener="#{menuView.update}"  url="ListarIngresos.gestor"/>
-                        <p:menuitem value="Fecha Límite" actionListener="#{menuView.update}"  url="ListarIngresos.gestor"/>
+                        <p:menuitem value="Registrar Ingresos" url="RegistrarIngresos.gestor"/>
+                        <p:menuitem value="Listar Ingresos" url="ListarIngresos.gestor"/>
+                        <p:menuitem value="Fecha Límite" url="ListarIngresos.gestor"/>
+                        <p:menuitem value="Registrar Ingreso Adicional" url="RegistroIngresoExtra.gestor"/>
                     </p:submenu>
                     <p:submenu label="Gastos">
-                        <p:menuitem value="Registrar Gastos" actionListener="#{menuView.save}" url="RegistrarGastos.gestor"/>
-                        <p:menuitem value="Listar Gastos" actionListener="#{menuView.update}"  url="ListarGastos.gestor"/>
+                        <p:menuitem value="Registrar Gastos" url="RegistrarGastos.gestor"/>
+                        <p:menuitem value="Listar Gastos" url="ListarGastos.gestor"/>
                         <p:submenu label="Categoría">
-                            <p:menuitem value="Registrar Categorías" actionListener="#{menuView.save}" url="RegistrarCategoria.gestor"/>
-                            <p:menuitem value="Listar Categorías" actionListener="#{menuView.update}"  url="ListarCategorias.gestor"/>
+                            <p:menuitem value="Registrar Categorías" url="RegistrarCategoriaGastos.gestor"/>
+                            <p:menuitem value="Listar Categorías" url="ListarCategoriaGastos.gestor"/>
                         </p:submenu>
                     </p:submenu>
-                    <p:submenu label="Balance"></p:submenu>
+                    <p:submenu label="Balance">
+                        <p:menuitem value="Gráfico"  url="Balance.gestor"/>
+                    </p:submenu>
                 </p:menu>
             </div>
         </h:form>

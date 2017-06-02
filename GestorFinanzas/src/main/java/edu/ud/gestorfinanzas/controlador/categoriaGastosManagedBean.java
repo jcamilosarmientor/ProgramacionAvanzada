@@ -2,6 +2,7 @@ package edu.ud.gestorfinanzas.controlador;
 
 import edu.ud.gestorfinanzas.ejb.CategoriaGastosFacadeLocal;
 import edu.ud.gestorfinanzas.persistencia.CategoriaGastos;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -16,9 +17,9 @@ import javax.faces.view.ViewScoped;
  * @author Juan Camilo Sarmiento Reyes
  */
 @ManagedBean
-@Named(value = "categoriaGastosManagedBean")
+@Named(value = "categoriaGastos")
 @ViewScoped
-public class CategoriaGastosManagedBean {
+public class CategoriaGastosManagedBean implements Serializable {
     
     @EJB
     private CategoriaGastosFacadeLocal categoriaGastosEJB;
@@ -46,19 +47,19 @@ public class CategoriaGastosManagedBean {
         }
     }
 
-    public CategoriaGastos getCategoriaGastos() {
-        return categoriaGastos;
-    }
-
-    public void setCategoriaGastos(CategoriaGastos categoriaGastos) {
-        this.categoriaGastos = categoriaGastos;
-    }
-
     public List<CategoriaGastos> getListaCategoriasGastos() {
         return listaCategoriasGastos;
     }
 
     public void setListaCategoriasGastos(List<CategoriaGastos> listaCategoriasGastos) {
         this.listaCategoriasGastos = listaCategoriasGastos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
