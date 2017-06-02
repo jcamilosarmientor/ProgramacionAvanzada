@@ -1,26 +1,26 @@
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\persistencia\RelacionGastosIngresos.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\RelacionGastosIngresosFacadeLocal.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\controlador\IngresosManagedBean.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\persistencia\Gastos.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\persistencia\Ingresos.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\RelacionGastosIngresosFacade.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\CategoriaGastosFacade.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\IngresosFacadeLocal.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\controlador\FechaLimiteManagedBean.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\IngresosExtraFacadeLocal.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\persistencia\CategoriaGastos.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\controlador\CategoriaGastosManagedBean.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\GastosFacade.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\persistencia\IngresosExtra.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\controlador\BalanceManagedBean.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\persistencia\FechaLimiteIngresos.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\FechaLimiteIngresosFacadeLocal.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\IngresosFacade.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\controlador\GastosManagedBean.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\controlador\IngresosExtraManagedBean.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\GastosFacadeLocal.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\IngresosExtraFacade.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\FechaLimiteIngresosFacade.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\AbstractFacade.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\controlador\Utilidades.java
-D:\workspace\ProgramacionAvanzada\GestorFinanzas\src\main\java\edu\ud\gestorfinanzas\ejb\CategoriaGastosFacadeLocal.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/CategoriaGastosFacade.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/controlador/IngresosManagedBean.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/persistencia/Ingresos.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/IngresosFacadeLocal.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/controlador/FechaLimiteManagedBean.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/persistencia/CategoriaGastos.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/RelacionGastosIngresosFacade.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/controlador/GastosManagedBean.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/persistencia/IngresosExtra.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/IngresosFacade.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/controlador/Utilidades.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/AbstractFacade.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/controlador/IngresosExtraManagedBean.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/FechaLimiteIngresosFacadeLocal.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/persistencia/FechaLimiteIngresos.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/IngresosExtraFacade.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/persistencia/RelacionGastosIngresos.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/FechaLimiteIngresosFacade.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/controlador/BalanceManagedBean.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/CategoriaGastosFacadeLocal.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/controlador/CategoriaGastosManagedBean.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/GastosFacadeLocal.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/GastosFacade.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/persistencia/Gastos.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/RelacionGastosIngresosFacadeLocal.java
+/Volumes/Macintosh HD/SilentOwl/Documents/workspace/Java/ProgramacionAvanzada/GestorFinanzas/src/main/java/edu/ud/gestorfinanzas/ejb/IngresosExtraFacadeLocal.java
