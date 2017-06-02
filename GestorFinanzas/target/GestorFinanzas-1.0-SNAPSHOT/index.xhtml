@@ -19,17 +19,8 @@
                 </f:facet>
 
                 <f:facet name="right">
-                    <p:commandButton type="button" value="New" icon="ui-icon-document" />
-
-                    <p:commandButton type="button" value="Open" icon="ui-icon-folder-open" />
-
-                    <span class="ui-separator">
-                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
-                    </span>
-
-                    <p:commandButton type="button" title="Save" icon="ui-icon-disk" />
-                    <p:commandButton type="button" title="Delete" icon="ui-icon-trash" />
-                    <p:commandButton type="button" title="Print" icon="ui-icon-print" />
+                    <a href="index.gestor"><p:commandButton type="button" value="Inicio" icon="fa fa-buysellads">
+                    </p:commandButton> </a>
                 </f:facet>
             </p:toolbar>
 
@@ -60,7 +51,9 @@
         <div id="contenido" class="contenidoPrincipal">
 
             <ui:insert name="content">
-                PRINCIPAL
+                <center>
+                    <img src="resources/img/fondo.png" alt="Gestor Finanzas" style="width:519px;hight:519px;"/>
+                </center>
             </ui:insert>
 
         </div>
